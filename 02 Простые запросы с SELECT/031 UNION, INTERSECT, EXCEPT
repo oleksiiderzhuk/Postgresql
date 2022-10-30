@@ -8,5 +8,11 @@ SELECT country
 FROM customers
 INTERSECT
 SELECT country
+FROM suppliers;
+
+SELECT country
+FROM customers
+EXCEPT
+SELECT country
 FROM suppliers
 
