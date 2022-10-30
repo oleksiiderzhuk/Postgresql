@@ -12,6 +12,7 @@ WHERE units_in_stock > 30;
 SELECT MAX(unit_price)
 FROM products
 WHERE units_in_stock > 30;
+
 /*5*/
 SELECT AVG(shipped_date - order_date)
 FROM orders
