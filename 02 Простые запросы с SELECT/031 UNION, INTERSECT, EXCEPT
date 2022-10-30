@@ -1,0 +1,6 @@
+SELECT country
+FROM customers
+UNION  /*UNION без дублікатів-повторень; якщо треба вивести всі рядки -UNION ALL */
+SELECT country
+FROM employees
+
