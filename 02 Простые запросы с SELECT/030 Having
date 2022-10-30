@@ -1,6 +1,6 @@
 SELECT category_id, SUM(unit_price * units_in_stock)
 FROM products
-where discontinued <> 1
+where discontinued <> 1                          /*WHERE - ПЕРВИЧНИЙ ФІЛЬТР*/
 GROUP BY category_id
-HAVING SUM(unit_price * units_in_stock) >5000
+HAVING SUM(unit_price * units_in_stock) >5000    /*HAVING - ВТОРИННИЙ ФІЛЬТР*/
 ORDER BY SUM(unit_price * units_in_stock) DESC
