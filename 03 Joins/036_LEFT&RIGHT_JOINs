@@ -1,0 +1,4 @@
+SELECT company_name, product_name
+FROM suppliers
+LEFT /*OR*/ /*INNER*/
+JOIN products ON suppliers.supplier_id = products.supplier_id;
