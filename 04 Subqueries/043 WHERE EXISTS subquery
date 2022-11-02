@@ -17,4 +17,4 @@ SELECT product_name
 FROM products
 WHERE NOT EXISTS (SELECT orders.order_id FROM orders
 			 JOIN order_details USING(order_id)
-				 WHERE order_details.product_id = product_id AND order_date BETWEEN '1995-02-01' AND '1995-02-15')
+				 WHERE order_details.product_id = product_id AND order_date BETWEEN '1995-02-01' AND '1995-02-15') /*конструкція фільтрує записи тільки у випадку, якщо підзапит не вертає NULL (якщо підзапит вертає NULL, такий SELECT буде відфільтрований з результату)*/
