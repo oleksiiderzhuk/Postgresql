@@ -15,8 +15,19 @@ WHERE NOT EXISTS (SELECT customer_id FROM orders
 /*вибрати продукти, які не куплялись за період часу*/
 SELECT product_name
 /*Вибрати унікальні компанії замовників, які робили замовлення на > 40 одиниць товару*/
+/*спочатку формуємо підзапит*/
 SELECT DISTINCT company_name
 FROM customers
 JOIN orders USING(customer_id)
 JOIN order_details USING(order_id)
 WHERE quantity > 40
+
+/*далі використовуємо його із ANY*/
+SELECT DISTINCT company_name
+FROM customers
+WHERE customer_id = ANY(
+	SELECT customer_id
+	FROM orders
+	JOIN order_details USING (order_id)
+	WHERE quantity > 40
+)
