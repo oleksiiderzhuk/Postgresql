@@ -14,8 +14,24 @@ WHERE NOT EXISTS (SELECT customer_id FROM orders
 
 /*вибрати продукти, які не куплялись за період часу*/
 SELECT product_name
-/*Вибрати унікальні компанії замовників, які робили замовлення на > 40 одиниць товару*/
-/*спочатку формуємо підзапит*/
+/*Вибрати продукти, кількість яких більша середньої кількості по замовленнях*/
+/*підзапит*/
+SELECT AVG(quantity)
+FROM order_details;
+
+SELECT DISTINCT product_name, quantity
+FROM products
+JOIN order_details USING(product_id)
+WHERE quantity > (
+    SELECT AVG(quantity)
+    FROM order_details)
+
+
+
+
+
+
+/*---*/
 SELECT DISTINCT company_name
 FROM customers
 JOIN orders USING(customer_id)
@@ -28,6 +44,6 @@ FROM customers
 WHERE customer_id = ANY(
 	SELECT customer_id
 	FROM orders
-	JOIN order_details USING (order_id)
+	JOIN order_details USING (order_id) 
 	WHERE quantity > 40
 )
