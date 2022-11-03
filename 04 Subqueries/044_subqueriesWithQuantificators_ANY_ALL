@@ -1,3 +1,41 @@
+/*Вибрати продукти, кількість яких більша середнього значення кількості замовлених товарів із груп, отриманих групуванням за product_id */
+
+/*кінцевий запит*/
+SELECT DISTINCT product_name, quantity
+FROM products
+JOIN order_details
+USING(product_id)
+WHERE quantity > ALL(SELECT AVG(quantity)
+FROM order_details
+GROUP BY product_id)
+ORDER BY quantity
+
+/*спочатку проектуємо підзапит*/
+SELECT AVG(quantity)
+FROM order_details
+GROUP BY product_id
+
+
+
+/*Вибрати продукти, кількість яких більша середньої кількості по замовленнях*/
+
+/*кінцевий запит*/
+SELECT DISTINCT product_name, quantity
+FROM products
+JOIN order_details USING(product_id)
+WHERE quantity > (
+    SELECT AVG(quantity)
+    FROM order_details)
+
+/*спочатку проектуємо підзапит*/
+SELECT AVG(quantity)
+FROM order_details;
+
+
+
+
+
+/*---*/
 /*вибрати компанії та імена замовників, які робили замовлення між 1.02.1995 і 15.02.1995 результуючий запит буде порожнім*/
 SELECT company_name, contact_name
 FROM customers
@@ -14,24 +52,6 @@ WHERE NOT EXISTS (SELECT customer_id FROM orders
 
 /*вибрати продукти, які не куплялись за період часу*/
 SELECT product_name
-/*Вибрати продукти, кількість яких більша середньої кількості по замовленнях*/
-/*підзапит*/
-SELECT AVG(quantity)
-FROM order_details;
-
-SELECT DISTINCT product_name, quantity
-FROM products
-JOIN order_details USING(product_id)
-WHERE quantity > (
-    SELECT AVG(quantity)
-    FROM order_details)
-
-
-
-
-
-
-/*---*/
 SELECT DISTINCT company_name
 FROM customers
 JOIN orders USING(customer_id)
