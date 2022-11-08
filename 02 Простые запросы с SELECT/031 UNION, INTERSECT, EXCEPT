@@ -4,15 +4,16 @@ UNION  /*UNION без дублікатів-повторень; якщо треб
 SELECT country
 FROM employees;
 
+/*Найти країни, в яких проживають кастомери, і  проживають постачальники*/
 SELECT country
 FROM customers
 INTERSECT
 SELECT country
 FROM suppliers;
 
+/*Найти країни, в яких проживають кастомери, але не проживають постачальники*/
 SELECT country
 FROM customers
 EXCEPT
 SELECT country
 FROM suppliers
-
