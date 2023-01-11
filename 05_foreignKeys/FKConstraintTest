@@ -1,0 +1,54 @@
+USE Master;
+DROP database IF EXISTS relations;
+CREATE database relations;
+USE relations;
+
+
+CREATE TABLE CLIENT
+(
+    ClientName CHAR(30) PRIMARY KEY,
+    Address1 CHAR(30),
+    Address2 CHAR(30),
+    City CHAR(30),
+    State CHAR(2),
+    PostalCode CHAR(10),
+    Phone CHAR(13),
+    Fax CHAR(30),
+    ContactPerson CHAR(30),
+);
+
+CREATE TABLE TESTS
+(
+    TestName CHAR(30) PRIMARY KEY,
+    StandardCharge CHAR(30)
+);
+
+CREATE TABLE EMPLOYEE
+(
+    EmployeeName CHAR (30) PRIMARY KEY,
+    ADDRESS1 CHAR (30),
+    Address2 CHAR (30),
+    City CHAR (25),
+    State CHAR (2),
+    PostalCode CHAR (10),
+    HomePhone CHAR (13),
+    OfficeExtension CHAR (4),
+    HireDate DATE,
+    JobClassification CHAR (10)
+)
+;
+
+CREATE TABLE ORDERS
+(
+    OrderNumber INTEGER PRIMARY KEY,
+    ClientName CHAR (30),
+    TestOrdered CHAR (30),
+    Salesperson CHAR (30),
+    OrderDate DATE,
+    CONSTRAINT NameFK FOREIGN KEY (ClientName) REFERENCES CLIENT (ClientName) ON DELETE CASCADE,
+    CONSTRAINT TestFK FOREIGN KEY (TestOrdered) REFERENCES TESTS (TestName)
+ON DELETE CASCADE,
+    CONSTRAINT SalesFK FOREIGN KEY (Salesperson) REFERENCES EMPLOYEE (EmployeeName)
+ON DELETE CASCADE   --or-- ON DELETE SET NULL
+
+);
