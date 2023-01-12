@@ -67,3 +67,17 @@ CASE
     WHEN conditionn THEN resultn
     ELSE resultx
 END
+
+--Updating values based on a condition
+UPDATE FOODS
+    SET RATING = CASE
+                    WHEN FAT < 1
+                    THEN ‘very low fat’
+                    WHEN FAT < 5
+                    THEN ‘low fat’
+                    WHEN FAT < 20
+                    THEN ‘moderate fat’
+                    WHEN FAT < 50
+                    THEN ‘high fat’
+                    ELSE ‘heart attack city’
+                    END ;
