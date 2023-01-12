@@ -49,7 +49,8 @@ CREATE TABLE ORDERS
     CONSTRAINT TestFK FOREIGN KEY (TestOrdered) REFERENCES TESTS (TestName)
 ON DELETE CASCADE,
     CONSTRAINT SalesFK FOREIGN KEY (Salesperson) REFERENCES EMPLOYEE (EmployeeName)
-ON DELETE CASCADE   --or-- ON DELETE SET NULL
+ON DELETE CASCADE
+    --or-- ON DELETE SET NULL
 
 );
 
@@ -57,3 +58,12 @@ ON DELETE CASCADE   --or-- ON DELETE SET NULL
 ALTER TABLE ORDERS
 ADD Birthday DATE;
 --DROP COLUMN Birthday ;
+
+--***************
+
+--Using CASE with search conditions
+CASE
+    WHEN condition1 THEN RESULT1
+    WHEN conditionn THEN resultn
+    ELSE resultx
+END
