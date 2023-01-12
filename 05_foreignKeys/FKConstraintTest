@@ -81,3 +81,7 @@ UPDATE FOODS
                     THEN ‘high fat’
                     ELSE ‘heart attack city’
                     END ;
+
+--To insert a savepoint into your SQL code, use the following syntax:
+SAVEPOINT savepoint_name ;
+ROLLBACK TO SAVEPOINT savepoint_name ;
